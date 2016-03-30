@@ -1,0 +1,48 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+
+Vagrant.configure(2) do |config|
+ 
+  config.vm.box = "ubuntu/trusty64"
+
+
+  # Provision the Base image
+  config.vm.provision "shell", inline: <<-SHELL
+    #UPDATE    
+    sudo apt-get update
+    #GET UNZIP
+    sudo apt-get install unzip
+    
+    
+    #INSTALL JAVA
+    sudo apt-get install --fix-missing -y
+    sudo apt-get install openjdk-6-jre-headless -y
+
+    #INSTALL DOCKER
+    sudo apt-key adv --keyserver hkp://pgp.mit.edu:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D
+    sudo echo 'deb https://apt.dockerproject.org/repo ubuntu-trusty main' > /etc/apt/sources.list.d/docker.list
+    sudo apt-get update
+    sudo apt-get install docker-engine -y
+    sudo service docker stop
+    sudo service docker start
+    sudo usermod -aG docker vagrant
+
+    #INSTALL DOCKER COMPOSE
+    curl -L https://github.com/docker/compose/releases/download/1.6.2/docker-compose-`uname -s`-`uname -m` > docker-compose
+    sudo mv docker-compose /usr/local/bin/docker-compose
+    sudo chmod +x /usr/local/bin/docker-compose
+
+
+    #INSTALL NODE/NPM
+    sudo apt-get install nodejs -y
+    sudo apt-get install npm -y
+
+    #PULL DOCKER IMAGES
+    docker pull node
+    docker pull dockerui/dockerui
+    docker pull tutum/haproxy
+
+
+  SHELL
+end
