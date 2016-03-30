@@ -1,1 +1,0 @@
-{"virtualbox":{"/ucd_config":{"guestpath":"/ucd_config","hostpath":"/Users/nhirt/PROJECTS/VAGRANT/VAGRANT_UCD/3_UCD_AGENT_MULTI/ucd_config","disabled":false,"__vagrantfile":true},"/vagrant":{"guestpath":"/vagrant","hostpath":"/Users/nhirt/PROJECTS/VAGRANT/VAGRANT_UCD/3_UCD_AGENT_MULTI","disabled":false,"__vagrantfile":true}}}
